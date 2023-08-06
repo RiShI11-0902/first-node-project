@@ -19,11 +19,11 @@
             "dest": "index.js"
         },
         {
-            "src": "/",
+            "src": "/add",
             "dest": "dist/index.html"
         },
         {
-            "src": "/add",
+            "src": "/",
             "dest": "dist/index.html"
         },
         {

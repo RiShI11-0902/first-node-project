@@ -29,8 +29,13 @@ exports.createProduct = async (req, res) => {
 };
 
 exports.getAllProduct = async (req, res) => {
-  const products = await Product.find();
-  res.json(products);
+  try {
+    const products = await Product.find();
+    res.json(products);
+  } catch (error) {
+    console.log(error);
+  }
+
   // route middleware
   // console.log(req.params);
   // res.json({type:'GET'})
@@ -55,17 +60,21 @@ exports.getIndividualProduct = async (req, res) => {
 exports.replaceProduct = async (req, res) => {
   // route middleware
   // const id = +req.params.id;
-    const id = req.params.id;
-    const products = await Product.findOneAndReplace({_id: id}, req.body,{new: true});
-    res.json(products)
+  const id = req.params.id;
+  const products = await Product.findOneAndReplace({ _id: id }, req.body, {
+    new: true,
+  });
+  res.json(products);
   // const proIndex = products.findIndex((p) => p.id === id);
   // products.splice(proIndex, 1, { ...req.body, id: id });
   // res.status(201).json();
 };
 exports.updateProduct = async (req, res) => {
   const id = req.params.id;
-  const products = await Product.findOneAndUpdate({_id: id}, req.body,{new: true});
-  res.json(products)
+  const products = await Product.findOneAndUpdate({ _id: id }, req.body, {
+    new: true,
+  });
+  res.json(products);
   // res.json({ type: "PATCH" });
   // const id = +req.params.id;
   // const proIndex = products.findIndex((p) => p.id === id);
@@ -76,8 +85,8 @@ exports.updateProduct = async (req, res) => {
 };
 exports.deleteProduct = async (req, res) => {
   const id = req.params.id;
-  const products = await Product.findOneAndDelete({_id: id});
-  res.json(products)
+  const products = await Product.findOneAndDelete({ _id: id });
+  res.json(products);
   // res.json({ type: "PATCH" });
   // const id = +req.params.id;
   // const proIndex = products.findIndex((p) => p.id === id);
