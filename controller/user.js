@@ -6,7 +6,7 @@ const users = data.users;
 // console.log(users);
 
 exports.createProduct = (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   users.push(req.body);
   // res.json({ type: "POST" });
   res.json(users);
@@ -14,10 +14,10 @@ exports.createProduct = (req, res) => {
 
 exports.getAllProduct = (req, res) => {
   // route middleware
-  console.log(req.params);
+  // console.log(req.params);
   // res.json({type:'GET'})
   res.json(users);
-  console.log(users);
+  // console.log(users);
   // res.status(201).send("<h1>hello world</h1>")
   // res.sendFile("")
   // res.json(users)
@@ -27,7 +27,7 @@ exports.getAllProduct = (req, res) => {
 exports.getIndividualProduct = (req, res) => {
   // route middleware
   const id = +req.params.id;
-  console.log("id is" + id);
+  // console.log("id is" + id);
   const pro = users.find((p) => p.id === id);
   res.json(pro);
 };
@@ -46,7 +46,7 @@ exports.updateProduct = (req, res) => {
   const product = users[proIndex];
   users.splice(proIndex, 1, { ...product, ...req.body });
   res.status(201).json();
-  console.log(users[proIndex]);
+  // console.log(users[proIndex]);
 };
 exports.deleteProduct = (req, res) => {
   // res.json({ type: "PATCH" });
