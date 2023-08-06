@@ -101,6 +101,9 @@ async function main() {
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
 
+server.listen(8080, () => {
+  console.log("Express start");
+});
 // schema
 
 
@@ -142,6 +145,3 @@ async function main() {
 
 ////////// Delete Data
 
-server.listen(8080, () => {
-  console.log("Express start");
-});
