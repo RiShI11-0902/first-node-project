@@ -14,7 +14,7 @@ exports.getAllProductSSR = async (req, res) => {
     const products = await Product.find();
 ejs.renderFile(path.resolve(__dirname,"../pages/index.ejs"), {product:products[0]}, function(err, str){
   // str => Rendered HTML string
-  res.json(str);  
+  res.send(str);  
 });
     
 }
