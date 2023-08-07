@@ -6,6 +6,19 @@ const { default: mongoose } = require("mongoose");
 const model = require("../modal/product");
 // const { error } = require("console");
 const Product = model.Product;
+const ejs = require('ejs')
+const path =  require('path')
+
+
+exports.getAllProductSSR = async (req, res) => {
+    const products = await Product.find();
+ejs.renderFile(path.resolve(__dirname,"../pages/index.ejs"), {product:products[0]}, options, function(err, str){
+  // str => Rendered HTML string
+  res.json(str);  
+});
+    
+}
+
 
 // console.log(Product);
 
