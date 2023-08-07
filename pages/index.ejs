@@ -6,11 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <% if (product) { %>
-    <h1><%= product.title %></h1>
-    <h1><%= product.rating %></h1>
-    <p><%= product.description %></p>
-    <img src="<% = product.thumbnail %>" alt="">
+    <% if(product) { %>
+    <h1><%=product.title %></h1>
+    <h1><%=product.rating %></h1>
+    <p><%=product.description %></p>
+    <img src="<%=product.thumbnail %>" alt="">
 </body>
 </html>
 <% } %>
