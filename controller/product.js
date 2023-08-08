@@ -17,6 +17,7 @@ exports.getAllProductSSR = async (req, res) => {
     function (err, str) {
       // str => Rendered HTML string
       res.send(str);
+      console.log(str);
     }
   );
 };
