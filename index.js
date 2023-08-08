@@ -70,6 +70,8 @@ const morgan = require("morgan"); // third party middleware
 const server = express();
 const cors = require('cors');
 const path = require('path')
+const ejs = require('ejs')
+
 
 
 //body parser
@@ -87,6 +89,8 @@ server.use("/users", userRouter.routes);
 server.use('*',(req,res)=>{
   res.sendFile(path.resolve(__dirname , "dist" , "index.html"))
 })
+
+app.set('view engine', 'ejs')
 
 
 //connection to code
