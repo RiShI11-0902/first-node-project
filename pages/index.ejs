@@ -6,7 +6,7 @@
 </style>
 
 <script>
-async function  delete(product) {
+async function deletep(product) {
     console.log(product);
     const response = await fetch('/products/'+product, {
         method: "DELETE"
@@ -21,7 +21,7 @@ async function  delete(product) {
     <img src="<%=product.thumbnail %>" alt="">
     <p><%=product.rating %></p>
     <p><%=product.description %></p>
-    <button onclick="delete('<%=product._id %>')">
+    <button onclick="deletep('<%=product._id %>')">
     delete</button>
 </div>
 <% } %>
