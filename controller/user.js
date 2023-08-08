@@ -1,58 +1,89 @@
 const fs = require("fs");
 const path = require('path')
+const modal = require("../modal/user")
+const mongoose = require('mongoose')
+const User = modal.User
 // const data = JSON.parse(fs.readFileSync(path.resolve( __dirname , "../data.json", "utf-8")));
 // const users = data.users;
 
 // console.log(users);
 
-exports.createProduct = (req, res) => {
-  // console.log(req.body);
-  users.push(req.body);
-  // res.json({ type: "POST" });
-  res.json(users);
+exports.createUser = async (req, res) => {
+ const user = new User(req.body)
+ try {
+  await user.save();
+  // console.log(User);
+  res.status(201).json(user);
+} catch (error) {
+  console.log(error);
+}
 };
 
-exports.getAllProduct = (req, res) => {
+exports.getAllUser = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    console.log(error);
+  }
+
   // route middleware
   // console.log(req.params);
   // res.json({type:'GET'})
-  res.json(users);
-  // console.log(users);
+  // res.json(Users);
   // res.status(201).send("<h1>hello world</h1>")
   // res.sendFile("")
-  // res.json(users)
+  // res.json(Users)
   // res.sendStatus(404)
 };
 
-exports.getIndividualProduct = (req, res) => {
+exports.getIndividualUser = async (req, res) => {
+  // const id = +req.params.id; // for mongodb
+  const id = req.params.id; // for mongoose
+  const users = await User.findById(id);
+  res.json(users);
   // route middleware
-  const id = +req.params.id;
   // console.log("id is" + id);
-  const pro = users.find((p) => p.id === id);
-  res.json(pro);
+  // const pro = Users.find((p) => p.id === id);
+  // res.json(pro);
 };
 
-exports.replaceProduct = (req, res) => {
+exports.replaceUser = async (req, res) => {
   // route middleware
-  const id = +req.params.id;
-  const proIndex = users.findIndex((p) => p.id === id);
-  users.splice(proIndex, 1, { ...req.body, id: id });
-  res.status(201).json();
+  // const id = +req.params.id;
+  const id = req.params.id;
+  const Users = await User.findOneAndReplace({ _id: id }, req.body, {
+    new: true,
+  });
+  res.json(Users);
+  // const proIndex = Users.findIndex((p) => p.id === id);
+  // Users.splice(proIndex, 1, { ...req.body, id: id });
+  // res.status(201).json();
 };
-exports.updateProduct = (req, res) => {
+
+exports.updateUser = async (req, res) => {
+  const id = req.params.id;
+  const Users = await User.findOneAndUpdate({ _id: id }, req.body, {
+    new: true,
+  });
+  res.json(Users);
   // res.json({ type: "PATCH" });
-  const id = +req.params.id;
-  const proIndex = users.findIndex((p) => p.id === id);
-  const product = users[proIndex];
-  users.splice(proIndex, 1, { ...product, ...req.body });
-  res.status(201).json();
-  // console.log(users[proIndex]);
+  // const id = +req.params.id;
+  // const proIndex = Users.findIndex((p) => p.id === id);
+  // const User = Users[proIndex];
+  // Users.splice(proIndex, 1, { ...User, ...req.body });
+  // res.status(201).json();
+  // console.log(Users[proIndex]);
 };
-exports.deleteProduct = (req, res) => {
+
+exports.deleteUser = async (req, res) => {
+  const id = req.params.id;
+  const Users = await User.findOneAndDelete({ _id: id });
+  res.json(Users);
   // res.json({ type: "PATCH" });
-  const id = +req.params.id;
-  const proIndex = users.findIndex((p) => p.id === id);
-  const product = users[proIndex];
-  users.splice(proIndex, 1, { ...proIndex, ...req.body });
-  res.status(201).json(product);
+  // const id = +req.params.id;
+  // const proIndex = Users.findIndex((p) => p.id === id);
+  // const User = Users[proIndex];
+  // Users.splice(proIndex, 1, { ...proIndex, ...req.body });
+  // res.status(201).json(User);
 };
