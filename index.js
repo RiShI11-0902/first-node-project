@@ -78,6 +78,8 @@ const ejs = require('ejs')
 server.use(cors());
 server.use(morgan("dev")); // default
 server.use(express.json());
+server.use(express.urlencoded());
+
 server.use(express.urlencoded({extended: true}))
 server.use(express.static( path.resolve(__dirname, process.env.PUBLIC_DIR)));
 console.log(process.env.DB_PASSWORD);
