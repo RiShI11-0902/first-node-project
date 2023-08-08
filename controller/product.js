@@ -6,19 +6,20 @@ const { default: mongoose } = require("mongoose");
 const model = require("../modal/product");
 // const { error } = require("console");
 const Product = model.Product;
-const ejs = require('ejs')
-const path =  require('path')
-
+const ejs = require("ejs");
+const path = require("path");
 
 exports.getAllProductSSR = async (req, res) => {
-    const products = await Product.find();
-ejs.renderFile(path.resolve(__dirname,"../pages/index.ejs"), {product:products[0]}, function(err, str){
-  // str => Rendered HTML string
-  res.send(str);  
-});
-    
-}
-
+  const products = await Product.find();
+  ejs.renderFile(
+    path.resolve(__dirname, "../pages/index.ejs"),
+    { product: products[0] },
+    function (err, str) {
+      // str => Rendered HTML string
+      res.send(str);
+    }
+  );
+};
 
 // console.log(Product);
 
@@ -82,6 +83,7 @@ exports.replaceProduct = async (req, res) => {
   // products.splice(proIndex, 1, { ...req.body, id: id });
   // res.status(201).json();
 };
+
 exports.updateProduct = async (req, res) => {
   const id = req.params.id;
   const products = await Product.findOneAndUpdate({ _id: id }, req.body, {
@@ -96,6 +98,7 @@ exports.updateProduct = async (req, res) => {
   // res.status(201).json();
   // console.log(products[proIndex]);
 };
+
 exports.deleteProduct = async (req, res) => {
   const id = req.params.id;
   const products = await Product.findOneAndDelete({ _id: id });
