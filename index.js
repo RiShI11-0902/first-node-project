@@ -90,7 +90,7 @@ server.use('*',(req,res)=>{
   res.sendFile(path.resolve(__dirname , "dist" , "index.html"))
 })
 
-app.set('view engine', 'ejs')
+server.set('view engine', 'ejs')
 
 
 //connection to code
