@@ -8,7 +8,7 @@
 <script>
 async function  delet(product) {
     console.log(product);
-    const response = await fetch(URL, {
+    const response = await fetch('/products/'+product, {
         method: "DELETE"
     })
 }
