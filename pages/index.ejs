@@ -241,10 +241,7 @@
       <div class="card">
         <div class="image-container">
           <div class="first">
-            <div class="d-flex justify-content-between align-items-center">
-              <span class="discount">-<%=product.discountPercentage %>%</span>
-              <span class="wishlist"><i class="fa fa-heart-o" onclick="deleteProduct('<%= product._id %>')"></i></span>
-            </div>
+            
           </div>
 
           <img
@@ -270,7 +267,7 @@
               <span class="rating-number"><%= product.rating %></span>
             </div>
 
-            <span class="buy">BUY +</span>
+            <span class="buy"><%= product.brand %></span>
           </div>
         </div>
       </div>
