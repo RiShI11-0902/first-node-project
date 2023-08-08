@@ -6,8 +6,11 @@
 </style>
 
 <script>
-function delet(product) {
+async function  delet(product) {
     console.log(product);
+    const response = await fetch(URL, {
+        method: "DELETE"
+    })
 }
 </script>
 <h1>hello</h1>
@@ -18,6 +21,7 @@ function delet(product) {
     <img src="<%=product.thumbnail %>" alt="">
     <p><%=product.rating %></p>
     <p><%=product.description %></p>
-    <button onclick="delete('<%=product._id%>')"></button>
+    <button onclick="delete('<%=product._id%>')">
+    delete</button>
 </div>
 <% } %>
