@@ -233,6 +233,7 @@
       el.remove();
     }
 </script> -->
+<% for (let product of products ) { %>
 <% if(product) { %>
 <div class="container mt-5" id="<%=product._id %>">
   <div class="row">
@@ -279,3 +280,5 @@
   </div>
 </div>
 <% } %>
+<% } %>
+
