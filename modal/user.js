@@ -1,5 +1,6 @@
-const mongoose = require("mongodb")
-const {Schema} = mongoose
+const mongoose = require("mongoose")
+const { Schema } = mongoose;
+
 
 const userSchema = new Schema({
     firstname: {type: String, required: true},
@@ -19,5 +20,5 @@ const userSchema = new Schema({
     token: String
 })
 
-exports.User = mongoose.MongoDBCollectionNamespace('User', userSchema)
+exports.User = mongoose.model('User', userSchema)
 

@@ -3,7 +3,6 @@ const userController = require("../controller/user");
 const router = express.Router();
 
 router
-  .post("/", userController.createUser)
   .get("/", userController.getAllUser)
   .get("/:id", userController.getIndividualUser)
   .put("/:id", userController.replaceUser)

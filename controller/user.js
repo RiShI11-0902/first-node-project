@@ -2,22 +2,14 @@ const fs = require("fs");
 const path = require('path')
 const modal = require("../modal/user")
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
 const User = modal.User
 // const data = JSON.parse(fs.readFileSync(path.resolve( __dirname , "../data.json", "utf-8")));
 // const users = data.users;
 
 // console.log(users);
 
-exports.createUser = async (req, res) => {
- const user = new User(req.body)
- try {
-  await user.save();
-  // console.log(User);
-  res.status(201).json(user);
-} catch (error) {
-  console.log(error);
-}
-};
+
 
 exports.getAllUser = async (req, res) => {
   try {
