@@ -71,10 +71,27 @@ const server = express();
 const cors = require('cors');
 const path = require('path')
 const ejs = require('ejs')
+const jwt = require('jsonwebtoken')
+
 
 
 
 //body parser
+const auth = ((req,res,next)=>{
+  try {
+   const token =  req.get('Authorization').split('Bearer ')[1];
+   console.log(token);
+  var decoded = jwt.verify(token, process.env.SECRET);
+  console.log(decoded);
+  if (decoded.email) {
+    next()
+  }else{
+    res.sendStatus(401)
+  }
+ } catch (error) {
+   res.sendStatus(401)
+ }
+})
 server.use(cors());
 server.use(morgan("dev")); // default
 server.use(express.json());
@@ -83,10 +100,12 @@ server.use(express.urlencoded());
 server.use(express.urlencoded({extended: true}))
 server.use(express.static( path.resolve(__dirname, process.env.PUBLIC_DIR)));
 console.log(process.env.DB_PASSWORD);
+const authRouter = require('./Routes/auth')
+server.use('/auth',authRouter.router)
 const productRouter = require("./Routes/Product");
-server.use("/products", productRouter.routes);
+server.use("/products", auth, productRouter.routes);
 const userRouter = require("./Routes/Users");
-server.use("/users", userRouter.routes);
+server.use("/users", auth, userRouter.routes);
 // to get the routing in react js
 server.use('*',(req,res)=>{
   res.sendFile(path.resolve(__dirname , "dist" , "index.html"))
