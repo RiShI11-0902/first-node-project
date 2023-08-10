@@ -70,8 +70,10 @@ const morgan = require("morgan"); // third party middleware
 const server = express();
 const cors = require('cors');
 const path = require('path')
+const fs = require('fs')
 const ejs = require('ejs')
 const jwt = require('jsonwebtoken')
+const publicKey = fs.readFileSync(path.resolve(__dirname,'./publicKey'), 'utf-8')
 
 
 
@@ -81,7 +83,7 @@ const auth = ((req,res,next)=>{
   try {
    const token =  req.get('Authorization').split('Bearer ')[1];
    console.log(token);
-  var decoded = jwt.verify(token, process.env.SECRET);
+  var decoded = jwt.verify(token, publicKey);
   console.log(decoded);
   if (decoded.email) {
     next()
